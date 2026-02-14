@@ -19,7 +19,6 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
-
   # nginx:
   #   image: nginx:alpine
   #   restart: unless-stopped
@@ -32,7 +31,6 @@ services:
   #   depends_on:
   #     app:
   #       condition: service_healthy
-
   mysql:
     image: mysql:8
     restart: unless-stopped
@@ -64,8 +62,6 @@ services:
       test: ["CMD", "redis-cli", "ping"]
 
 volumes:
-  app_public:
-    driver: local
   app_storage:
     driver: local
   mysql_data:
