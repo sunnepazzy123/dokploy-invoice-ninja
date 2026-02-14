@@ -6,6 +6,8 @@ services:
     restart: unless-stopped
     env_file:
       - ./.env
+    expose:
+      - "8000"
     volumes:
       # - ./php/php.ini:/usr/local/etc/php/conf.d/invoiceninja.ini:ro
       # - ./php/php-fpm.conf:/usr/local/etc/php-fpm.d/invoiceninja.conf:ro
@@ -18,18 +20,18 @@ services:
       redis:
         condition: service_healthy
 
-  nginx:
-    image: nginx:alpine
-    restart: unless-stopped
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx:/etc/nginx/conf.d:ro
-      - app_public:/var/www/html/public:ro
-      - app_storage:/var/www/html/storage:ro
-    depends_on:
-      app:
-        condition: service_healthy
+  # nginx:
+  #   image: nginx:alpine
+  #   restart: unless-stopped
+  #   ports:
+  #     - "80"
+  #   volumes:
+  #     - ./nginx:/etc/nginx/conf.d:ro
+  #     - app_public:/var/www/html/public:ro
+  #     - app_storage:/var/www/html/storage:ro
+  #   depends_on:
+  #     app:
+  #       condition: service_healthy
 
   mysql:
     image: mysql:8
